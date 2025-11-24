@@ -1,0 +1,1613 @@
+/* ======================================= */
+/* 0. VARIABLES Y CONFIGURACIÓN GLOBAL     */
+/* ======================================= */
+
+:root {
+    /* Dimensiones de Diseño */
+    --content-width: 1088px;
+    --menu-lateral-width: 40px;
+    --padding-page: 50px;
+
+    /* Colores */
+    --color-bg-dark: #102641;
+    --color-card-bg: #1F375A;
+    --color-text-primary: #FFFFFF;
+    --color-text-secondary: #AAAAAA; 
+    --color-primary-pink: #FA62A5; 
+    --color-orange: #FFA500;    
+    --color-orange-darker: #A36A00; 
+   
+    
+    /* Colores de Hover/Estados */
+    --color-pink-hover: #FA328A;
+    --color-added-green: #69B469; 
+    --color-added-green-hover: #5AA15A;
+    --color-azul-secundario: #6CC3D5; 
+    --color-azul-hover-bg: #1A7B9B;  
+    --color-orange-dark: #CC8400;   
+    --color-rosa-hover-instrucciones: #E42274;
+    --color-rosa-hover-pausar: #A70046; 
+    
+    /* FUENTES */
+    --font-base: 'Outfit', sans-serif;
+    --font-heading: 'Montserrat', sans-serif;
+    --font-family: "Rosario", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    
+    /* TAMAÑOS BASE */
+    --font-size-base: 16px;
+
+    --transicion-rapida: all 0.3s ease-in-out;
+}
+
+/* ======================================= */
+/* 1. BODY Y ALINEACIÓN GLOBAL             */
+/* ======================================= */
+
+body {
+    margin-left: var(--menu-lateral-width); 
+    margin-top: 20px;  
+    padding: 0;
+    background-color: var(--color-bg-dark);
+    color: var(--color-text-primary);
+    font-family: var(--font-base);
+    font-size: var(--font-size-base);
+}
+
+.game-page {
+    width: var(--content-width); 
+    margin: 0; 
+    margin-left: 40px; 
+    padding-top: 50px;  
+}
+
+/* ======================================= */
+/* 2. BREADCRUMB Y SHARE                   */
+/* ======================================= */
+
+.game-breadcrumb-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    height: 29px;
+}
+
+.breadcrumb {
+    font-family: var(--font-base);
+    font-weight: 400;
+    color: var(--color-text-secondary); 
+    font-size: 0.90rem;
+}
+
+.breadcrumb span {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    color: var(--color-text-primary); 
+}
+
+.share-btn {
+    background: none;
+    border: none;
+    color: var(--color-text-primary);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* ======================================= */
+/* 3. CONTENEDOR PRINCIPAL DEL JUEGO FLAPPY*/
+/* ======================================= */
+
+.game-banner-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.juegoFlappyContenedor {
+    position: relative;
+    width: 1100px;
+    height: 550px;
+    background-color: var(--color-card-bg);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flappy-puntaje {
+    position: absolute;
+    top: 20px;
+    color: white;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 3em;
+    z-index: 100;
+    text-shadow: 3px 3px 0 #000; 
+}
+
+
+/* ======================================= */
+/* PANTALLA DE INICIO DEL FLAPPY            */
+/* ======================================= */
+
+.pantalla-inicio {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: lightblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../img/flappy/fondos/01_ground.png'),
+    url('../img/flappy/fondos/02_treesandbushes.png'),
+    url('../img/flappy/fondos/03_distant_trees.png'),
+    url('../img/flappy/fondos/04_bushes.png'),
+    url('../img/flappy/fondos/05_hill1.png'),
+    url('../img/flappy/fondos/06_hill2.png'),
+    url('../img/flappy/fondos/07_huge_clouds.png'),
+    url('../img/flappy/fondos/08_clouds.png'),
+    url('../img/flappy/fondos/09_distant_clouds1.png'),
+    url('../img/flappy/fondos/10_distant_clouds.png');
+    background-size: cover;
+    background-position: left center;
+    background-repeat: no-repeat;
+
+}
+
+/* ===========================
+   TÍTULO FLAPPY BIRD ANIMADO
+   =========================== */
+.tituloFlappy {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 5px;
+
+    font-family: 'Press Start 2P', cursive;
+    font-size: 70px;
+    letter-spacing: 4px;
+
+    animation: flotar 2.2s ease-in-out infinite;
+}
+
+.tituloFlappy span {
+    display: inline-block;
+
+    text-shadow:
+        -4px 0px 0 #000,
+         4px 0px 0 #000,
+         0px -4px 0 #000,
+         0px  4px 0 #000;
+}
+
+.tituloFlappy span:nth-child(1)  { color: #f7d45c; } /* F - amarillo */
+.tituloFlappy span:nth-child(2)  { color: #8ee6ff; } /* L - celeste */
+.tituloFlappy span:nth-child(3)  { color: #6ad8ff; } /* A - celeste oscuro */
+.tituloFlappy span:nth-child(4)  { color: #8cd34a; } /* P - verde */
+.tituloFlappy span:nth-child(5)  { color: #b586ff; } /* P - violeta */
+.tituloFlappy span:nth-child(6)  { color: #6d5cff; } /* Y - azul/violeta */ 
+.tituloFlappy span:nth-child(7)  { color: #ff66ad; } /* B - rosa */
+.tituloFlappy span:nth-child(8)  { color: #ff9dd1; } /* I - rosa claro */
+.tituloFlappy span:nth-child(9)  { color: #ffcc5c; } /* R - amarillo rosado */
+.tituloFlappy span:nth-child(10) { color: #6ad8ff; } /* D - celeste */
+
+.tituloFlappy .marca {
+    font-family: Arial, sans-serif;  
+    font-size: 40px;                 
+    color: white;
+    margin-left: 5px;
+    text-shadow: none !important;  
+    position: relative;
+    top: -15px;
+}
+
+
+/* Animación suave arriba/abajo */
+@keyframes flotar {
+    0%   { transform: translate(-50%, 0px); }
+    50%  { transform: translate(-50%, -15px); }
+    100% { transform: translate(-50%, 0px); }
+}
+
+/* Contenedor centrado del pájaro */
+.pajaro-inicio {
+    position: absolute;
+    top: 40%;  /* Debajo del título */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 45px;
+    overflow: hidden;
+
+    animation: flotarPajaro 2.2s ease-in-out infinite;
+}
+
+.pajaro-frame {
+    width: 60px;       
+    height: 42px;      
+    background-image: url("../img/flappy/portada/spritesheetPortada.png");
+    background-repeat: no-repeat;
+    animation: volar 320ms steps(3) infinite; 
+}
+
+@keyframes volar {
+    from { background-position:    0px; } 
+    to   { background-position: -180px; } 
+}
+@keyframes flotarPajaro {
+    0%   { transform: translate(-50%, 0px); }
+    50%  { transform: translate(-50%, -12px); }
+    100% { transform: translate(-50%, 0px); }
+}
+
+
+.botones-inicio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+    top: 130px;
+}
+
+.btn-primary-play {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+
+    width: 270px;
+    height: 60px;
+
+    background-color: #4ec0ca;        
+    border: 4px solid #000000;        
+    box-shadow:
+        0 0 0 4px #1a8c96 inset,      
+        0 6px 0 #156d75;  
+    
+    border-radius: 10px;
+
+    color: white;
+    text-shadow:
+        -3px 0px 0 #000,
+         3px 0px 0 #000,
+         0px -3px 0 #000,
+         0px  3px 0 #000;  
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-primary-play:hover {
+    transform: translateY(-4px);
+    box-shadow:
+        0 0 0 4px #1a8c96 inset,
+        0 10px 0 #156d75,
+        0 12px 15px rgba(0,0,0,0.5);
+}
+
+.btn-primary-play:active {
+    transform: translateY(2px);
+    box-shadow:
+        0 0 0 4px #1a8c96 inset,
+        0 3px 0 #156d75;
+}
+
+
+.flappy-btn-instrucciones {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    width: 260px;
+    height: 45px;
+    letter-spacing: 2px;
+    background-color: #4ec0ca;
+    border: 4px solid #000000;
+
+    box-shadow:
+        0 0 0 4px #1a8c96 inset,
+        0 5px 0 #156d75,
+        0 7px 10px rgba(0,0,0,0.4);
+
+    border-radius: 10px;
+    color: white;
+    
+    text-shadow:
+        -2px 0px 0 #000,
+         2px 0px 0 #000,
+         0px -2px 0 #000,
+         0px  2px 0 #000;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.flappy-btn-instrucciones:hover {
+    transform: translateY(-3px);
+    box-shadow:
+        0 0 0 4px #1a8c96 inset,
+        0 8px 0 #156d75,
+        0 10px 15px rgba(0,0,0,0.5);
+}
+
+.flappy-btn-instrucciones:active {
+    transform: translateY(1px);
+    box-shadow:
+        0 0 0 4px #1a8c96 inset,
+        0 3px 0 #156d75;
+}
+
+
+/* ======================================= */
+/* PANTALLA DE INSTRUCCIONES (MODAL)       */
+/* ======================================= */
+
+.flappy-pantalla-instrucciones {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.flappy-pantalla-instrucciones::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(1px);
+    z-index: -1;
+}
+
+/* ===========================================
+    PANEL CENTRAL (Compacto)
+=========================================== */
+.flappy-instrucciones-panel {
+    width: 90%;
+    max-height: 90%;
+    padding: 22px 25px;
+    border-radius: 16px;
+    background-color: #c8e5a6;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.45);
+    border: 5px solid #4c6b33;
+
+    transform: translateY(-20px) scale(0.9);
+    opacity: 0;
+    animation: slideGameOver 0.45s forwards cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ===========================================
+    TÍTULO
+=========================================== */
+.flappy-titulo-instrucciones {
+    font-family: 'Press Start 2P', sans-serif;
+    font-size: 28px;
+    margin-bottom: 12px;
+    color: #ffa75f;
+    text-shadow:
+        -2px 0px #ffffff,
+        2px 0px #ffffff,
+        0px -2px #ffffff,
+        0px 2px #ffffff;
+}
+
+/* ===========================================
+    TEXTOS
+=========================================== */
+.flappy-descripcion-general {
+    font-family: 'Press Start 2P', sans-serif;
+    text-align: center;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+    line-height: 1.5;
+    color: #2f4b1f;
+    text-shadow: 1px 1px 0 #ffffff
+}
+
+.flappy-regla-item p {
+    font-family: 'Roboto', sans-serif;
+    text-align: left;
+    margin-bottom: 6px;
+    font-size: 1.05em; 
+    line-height: 1.4;
+    color: #000000;
+}
+
+
+/* ===========================================
+    GRID DE REGLAS (Compacto)
+=========================================== */
+.flappy-reglas-grid {
+    display: grid;
+    grid-template-columns: minmax(100px, 1fr) minmax(100px, 1fr);
+    gap: 12px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    /* Centrar la rejilla en el panel */
+    justify-content: center;
+    max-width: 100%; 
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ===========================================
+    TARJETAS DE REGLAS
+=========================================== */
+.flappy-regla-item {
+    background-color: #cfe8b6;
+    padding: 8px; 
+    border-radius: 10px;
+    border: 3px solid #4c6b33;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    font-size: 0.85em;
+    line-height: 1.3;
+}
+
+.flappy-subtitulo,
+.flappy-regla-item h3 {
+    font-family: 'Press Start 2P', sans-serif;
+    color: #2f4b1f;
+    font-size: 0.9em;
+    text-align: left;
+    margin: 0 0 6px 0;
+    text-shadow: 1px 1px 0 #ffffff;
+}
+
+/* -------------------------------------------
+    AJUSTES ESPECÍFICOS PARA LISTAS Y TEXTO
+    Para que el texto aparezca con puntos.
+------------------------------------------- */
+.flappy-regla-item ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin: 0;
+    margin-bottom: 12px;
+    font-size: 1.05em; 
+}
+
+.flappy-regla-item li {
+    font-family: 'Roboto', sans-serif;
+    color: #000000;
+    margin-bottom: 5px;
+    text-align: left;
+    line-height: 1.4;
+}
+
+
+.control-iconos-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; 
+    margin: 20px 0;
+    flex-wrap: nowrap; 
+}
+
+.control-iconos-container img {
+    max-width: 100px; 
+    height: auto;
+    border-radius: 4px;
+    padding: 4px;
+}
+
+
+
+/* ===========================================
+    BOTÓN VOLVER (Centrado)
+=========================================== */
+.flappy-btn-volver {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.9rem;
+    width: 200px;
+    height: 45px;
+    background-color: #63c74d;
+    border: 4px solid #000;
+    box-shadow:
+        0 0 0 4px #3b7a2b inset,
+        0 5px 0 #2a5d1d;
+    border-radius: 10px;
+    color: white;
+    text-shadow:
+        -2px 0px 0 #000,
+        2px 0px 0 #000,
+        0px -2px 0 #000,
+        0px 2px 0 #000;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    margin: 15px auto 0 auto; 
+}
+
+.flappy-btn-volver:hover {
+    transform: translateY(-3px);
+    box-shadow:
+        0 0 0 4px #3b7a2b inset,
+        0 8px 0 #2a5d1d,
+        0 10px 12px rgba(0,0,0,0.5);
+}
+
+.flappy-btn-volver:active {
+    transform: translateY(2px);
+    box-shadow:
+        0 0 0 4px #3b7a2b inset,
+        0 3px 0 #2a5d1d;
+}
+/* ======================================= */
+/* PANTALLA DE JUEGO & CLASE BASE (.layer) */
+/* ======================================= */
+
+.pantalla-juego {
+  position: absolute;
+  width: 100%;
+  height: 100%; 
+  top: 0; 
+  left: 0; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  
+}
+
+.layer {
+  position: absolute;
+  width: 100%;
+  height: 100%; 
+  background-repeat: repeat-x;
+  background-size: 1100px auto; 
+
+}
+
+.parallax-paused .layer {
+    animation-play-state: paused !important;
+}
+
+/* ======================================= */
+/* PLANTA CARNÍVORA                             */
+/* ======================================= */
+.planta-carnivora {
+    background-image: url("../img/flappy/planta_carnivora_spritesheet.png");
+    background-size: 144px 48px;
+    background-repeat: no-repeat;
+    transition: transform 0.08s linear;
+    z-index: 5;
+    position: absolute;
+}
+
+/* ======================================= */
+/* EXPLOSION DE IMPACTO                    */
+/* ======================================= */
+
+.explosion-fx {
+    position: absolute;
+    width: 60px;     
+    height: 60px;   
+    z-index: 1000;       
+    
+    background-image: url('../img/flappy/explosion_spritesheet.png'); 
+    background-repeat: no-repeat;
+    
+    background-size: 600px 60px; 
+    background-position: 0 0;
+    image-rendering: pixelated; 
+}
+
+/* ======================================= */
+/* KEYFRAMES                               */
+/* ======================================= */
+
+@keyframes scroll {
+  0% { 
+    background-position-x: 0px; 
+  }
+  100% { 
+    background-position-x: -1100px;
+  } 
+}
+
+/* ======================================= */
+/* DEFINICIÓN DE CAPAS                     */
+/* ======================================= */
+
+.layer-11 { 
+    background-image: url('../img/flappy/fondos/11_background.png');
+    z-index: 1; 
+    animation: scroll 26s infinite linear; 
+    background-position: left 5%; 
+}
+
+.layer-10 { 
+    background-image: url('../img/flappy/fondos/10_distant_clouds.png'); 
+    z-index: 2;
+    animation: scroll 24s infinite linear; 
+    background-position: left 15%;  
+}
+.layer-9  { 
+    background-image: url('../img/flappy/fondos/09_distant_clouds1.png'); 
+    z-index: 3;
+    animation: scroll 22s infinite linear; 
+    background-position: left 25%;
+}
+
+.layer-8  { 
+    background-image: url('../img/flappy/fondos/08_clouds.png'); 
+    z-index: 4;
+    animation: scroll 20s infinite linear; 
+    background-position: left 85%;
+}
+.layer-7  { 
+    background-image: url('../img/flappy/fondos/07_huge_clouds.png'); 
+    z-index: 5;
+    animation: scroll 18s infinite linear; 
+    background-position: left 75%;
+}
+.layer-6  { 
+    background-image: url('../img/flappy/fondos/06_hill2.png'); 
+    z-index: 6;
+    animation: scroll 16s infinite linear; 
+    background-position: bottom left; 
+}
+.layer-5  { 
+    background-image: url('../img/flappy/fondos/05_hill1.png'); 
+    z-index: 7;
+    animation: scroll 14s infinite linear;
+    background-position: bottom left; 
+}
+
+.layer-4  { 
+    background-image: url('../img/flappy/fondos/04_bushes.png'); 
+    z-index: 8;
+    animation: scroll 12s infinite linear; 
+    background-position: bottom left;
+}
+.layer-3  { 
+    background-image: url('../img/flappy/fondos/03_distant_trees.png'); 
+    z-index: 9;
+    animation: scroll 10s infinite linear; 
+    background-position: bottom left;
+}
+.layer-2  { 
+    background-image: url('../img/flappy/fondos/02_treesandbushes.png'); 
+    z-index: 10;
+    animation: scroll 8s infinite linear; 
+    background-position: bottom left;
+}
+.layer-1  { 
+    background-image: url('../img/flappy/fondos/01_ground.png'); 
+    z-index: 11; 
+    height: 10%; 
+    bottom: 0;  
+    animation: scroll 6s infinite linear; 
+    background-position: bottom left;
+}
+
+/* ======================================= */
+/* ESTILOS DE TUBERIAS                     */
+/* ======================================= */
+
+.contenedor-tuberia {
+    position: absolute;
+    top: 0;
+    width: 60px; 
+    height: 100%; 
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; 
+    pointer-events: none; 
+    z-index: 20; 
+    line-height: 0; 
+    font-size: 0;
+}
+
+.tuberia-wrapper {
+    width: 100%; 
+    display: flex;
+    flex-direction: column; 
+    box-sizing: border-box;
+    image-rendering: pixelated; 
+    justify-content: flex-start;
+    line-height: 0; 
+    font-size: 0;
+}
+
+.pico-pipe-arriba, 
+.pico-pipe-abajo {
+    position: relative; 
+    z-index: 10;        
+}
+
+.cuerpo-pipe {
+    position: relative;
+    z-index: 10;
+}
+.tuberia-abajo-wrapper {
+    margin-top: auto; 
+    justify-content: flex-end; 
+}
+
+.tuberia-segmento {
+    width: 100%; 
+    image-rendering: pixelated;
+    background-repeat: no-repeat;
+    line-height: 0; 
+    font-size: 0;
+    vertical-align: top;
+}
+
+.tuberia-arriba-wrapper .cuerpo-pipe {
+    
+    background-image: url('../img/flappy/tuberias/bodyTuberiaArriba.png'); 
+    
+    background-repeat: no-repeat; 
+    background-size: 90% auto; 
+    background-position: center bottom; 
+    order: 1; 
+}
+
+.tuberia-abajo-wrapper .cuerpo-pipe {
+   
+    background-image: url('../img/flappy/tuberias/bodyTuberiaAbajo.png'); 
+    
+    background-repeat: no-repeat; 
+    background-size: 90% auto; 
+    background-position: center top; 
+    order: 2; 
+}
+
+.pico-pipe-arriba {
+    background-image: url('../img/flappy/tuberias/pipeTuberiaArriba.png');
+    height: 25px; 
+    order: 2; 
+    background-position: center bottom;
+    background-size: 100% 100%; 
+}
+
+.pico-pipe-abajo {
+    background-image: url('../img/flappy/tuberias/pipeTuberiaAbajo.png');
+    height: 25px; 
+    order: 1; 
+    background-position: center top; 
+    background-size: 100% 100%; 
+}
+.tapToStart {
+    position: absolute;
+    left: 200px;
+    top: 400px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.6rem;
+    color: black;
+    text-shadow: 2px 2px 0 white;
+    animation: parpadeo 1s infinite;
+    pointer-events: none;
+
+    z-index: 9999;
+}
+@keyframes parpadeo { 
+    0% { opacity: 1; } 
+    50% { opacity: 0.5; } 
+    100% { opacity: 1; } 
+}
+.tapToStart.oculto {
+    display: none;
+}
+
+
+.tapToStart img {
+    width: 50px;
+}
+
+.flappy-puntaje {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    
+    font-family: 'Press Start 2P', cursive;
+    font-size: 20px; 
+    color: white;
+    text-shadow: 2px 2px 0px black;
+
+    /* Caja */
+    background-color: #d2a679;   
+    border: 4px solid #8b5a2b;   
+    padding: 10px 20px;
+    border-radius: 8px;
+
+    z-index: 9999;
+    pointer-events: none;
+}
+
+
+/* ======================================= */
+/* CONFIGURACIONES PAJARO                  */
+/* ======================================= */
+
+.pajaro-contenedor {
+    position: absolute;
+    width: 34px;      
+    height: 24px;
+    overflow: hidden; 
+    z-index: 50;
+    transition: transform 0.15s linear;
+}
+
+#pajaro {
+    width: 102px;     
+    height: 24px;
+    object-fit: none;
+}
+
+@keyframes invulnerable-flash {
+    0%, 100% { 
+        opacity: 1; 
+        filter: brightness(100%); 
+    }
+    50% { 
+        opacity: 0.3; 
+        filter: brightness(250%); 
+    }
+}
+
+.pajaro-invulnerable {
+    animation: invulnerable-flash 0.05s steps(1) infinite; 
+    filter: brightness(200%); 
+}
+
+/* ======================================= */
+/* ANIMACIÓN DEL PAJARO                    */
+/* ======================================= */
+
+@keyframes aleteo {
+    0%, 100% {
+        transform: translate(0px, 0); 
+    }
+    33% {
+        transform: translate(-34px, 0); 
+    }
+    66% {
+        transform: translate(-68px, 0); 
+    }
+}
+
+.pajaro-volando {
+    animation: aleteo 0.2s steps(1) infinite;
+}
+
+/* ======================================= */
+/* PANTALLA GAME OVER (overlay)            */
+/* ======================================= */
+#pantallaGameOver {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(1px);
+
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+}
+
+#pantallaGameOver.mostrar {
+    display: flex;
+    animation: fadeInFondo 0.4s forwards ease-out;
+    pointer-events: all;
+}
+
+
+@keyframes fadeInFondo {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+
+/* ------------ TARJETA GAME OVER ---------- */
+#pantallaGameOver .gameOverCard {
+    width: 600px;
+    max-width: 90%;
+
+    background: #c8e5a6;     
+    border: 6px solid #4c6b33;
+    border-radius: 20px;
+
+    padding: 35px 40px;
+    text-align: center;
+
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+
+    transform: translateY(-30px) scale(0.9);
+    opacity: 0;
+
+    animation: slideGameOver 0.45s forwards cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideGameOver {
+    0% {
+        transform: translateY(-30px) scale(0.9);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0px) scale(1);
+        opacity: 1;
+    }
+}
+
+
+/* ------------ TÍTULO ------------ */
+#pantallaGameOver .gameOverCard h2 {
+    font-family: 'Press Start 2P', sans-serif;
+    font-size: 46px;
+    margin-bottom: 40px;
+
+    color: #ffa75f;                  
+    text-shadow: 
+        -4px 0px #ffffff,
+         4px 0px #ffffff,
+         0px -4px #ffffff,
+         0px  4px #ffffff;           
+}
+
+
+/* ------------ PUNTAJES ------------ */
+.gameOverScore,
+.gameOverBest {
+    font-family: 'Press Start 2P';
+    font-size: 22px;
+
+    color: #2f4b1f;   
+    text-shadow: 2px 2px 0 #ffffff;
+    margin-bottom: 15px;
+}
+
+/* ------------ BOTONES ------------ */
+#pantallaGameOver .btns-gameOver {
+    gap: 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+#pantallaGameOver button {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+
+    width: 250px;
+    height: 55px;
+
+    background-color: #63c74d; 
+    border: 4px solid #000000; 
+
+
+    box-shadow:
+        0 0 0 4px #3b7a2b inset,   
+        0 6px 0 #2a5d1d;          
+
+    border-radius: 10px;
+
+    color: white;
+    text-shadow:
+        -3px 0px 0 #000,
+         3px 0px 0 #000,
+         0px -3px 0 #000,
+         0px  3px 0 #000;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+
+#pantallaGameOver button:hover {
+    transform: translateY(-4px);
+    box-shadow:
+        0 0 0 4px #3b7a2b inset,
+        0 10px 0 #2a5d1d,
+        0 12px 15px rgba(0,0,0,0.5);
+}
+
+#pantallaGameOver button:active {
+    transform: translateY(2px);
+    box-shadow:
+        0 0 0 4px #3b7a2b inset,
+        0 3px 0 #2a5d1d;
+}
+/* ======================================= */
+/* VIDAS AL CHOCAR LA PLANTA               */
+/* ======================================= */
+#hud-vidas {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 30;
+
+    display: flex;
+    gap: 10px;
+
+    background: rgba(0, 0, 0, 0.35);     
+    padding: 10px 20px;
+    border-radius: 12px;
+
+    border: 3px solid rgba(255, 255, 255, 0.4); 
+
+    backdrop-filter: blur(3px); 
+}
+
+.corazon {
+    width: 28px;
+    height: auto;
+}
+
+.corazon-extra {
+    position: absolute;
+    z-index: 70;
+    background-repeat: no-repeat;
+}
+
+.bonus-3-extra{
+    position: absolute;
+    z-index: 70;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+}
+
+.notificacion-vida-perdida {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+
+    background-color: #c8e5a6; 
+    color: #2a5d1d;            
+
+    padding: 18px 40px;
+
+    border: 4px solid #ffffff;
+    box-shadow:
+        0px 0px 0px 4px #000000,   
+        4px 4px 0px #000000;       
+
+    border-radius: 8px;
+
+    font-family: 'Press Start 2P', cursive;
+    font-size: 18px;
+    text-align: center;
+
+    animation: popFlappy 0.35s ease-out;
+}
+
+@keyframes popFlappy {
+    0%   { transform: translate(-50%, -50%) scale(0.6); opacity: 0; }
+    60%  { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+.oculto {
+    display: none !important;
+}
+
+
+
+/* ======================================= */
+/* PAJARO DEL FONDO                   */
+/* ======================================= */
+.pajaro-fondo {
+    position: absolute;
+    width: 84px;        
+    height: 70px;       
+    z-index: 10;       
+    
+    background-image: url('../img/flappy/bird_fondo_spritesheet.png'); 
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-size: 336px 70px;
+
+}
+/* ======================================= */
+/* 3.4. FOOTER DEL JUEGO                    */
+/* ======================================= */
+
+.card-footer {
+    width: 1100px;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    padding: 20px 10px;
+    margin-top: 10px;
+    margin-bottom: 20px; 
+    border-radius: 0 0 15px 15px; 
+}
+
+.card-footer h2 {
+    font-family: var(--font-heading); 
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: var(--color-text-primary);
+    margin: 0; 
+}
+
+.btn-add-game {
+    font-family: var(--font-base); 
+    font-weight: 600;
+    margin: 0; 
+    border-radius: 8px; 
+    padding: 8px 18px; 
+    font-size: 1rem;
+    cursor: pointer;
+    background-color: var(--color-primary-pink); 
+    color: #ffffff; 
+    border: none;
+    box-shadow: 0 0 0 transparent; 
+    animation: none !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.4s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px; 
+}
+
+.btn-add-game i {
+    color: #ffffff;
+    font-size: 1.1rem;
+}
+
+.btn-add-game:not(.added):hover { 
+    transform: translateY(-3px) scale(1.02); 
+    background-color: var(--color-pink-hover);
+    color: #A70046; 
+}
+
+.btn-add-game:not(.added):hover i {
+    color: #A70046;
+    transition: color 0.3s ease;
+}
+
+.btn-add-game.added {
+    background-color: var(--color-added-green);
+    color: #ffffff; 
+}
+
+.btn-add-game.added:hover {
+    background-color: var(--color-added-green-hover);
+    transform: translateY(-3px) scale(1.02); 
+    color: #ffffff;
+}
+
+/* ======================================= */
+/* 4. REGLAS, CONTROLES Y COMENTARIOS      */
+/* ======================================= */
+
+.game-info-details {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: space-between;
+    
+    /* Contenedor principal (Tarjeta Blocka) */
+    border: 3px solid var(--color-primary-pink); 
+    border-radius: 15px; 
+    padding: 20px; 
+    background-color: var(--color-card-bg);
+    box-sizing: border-box;
+    overflow: hidden;
+     
+    margin-bottom: 20px;
+    align-items: stretch; 
+}
+
+.info-section {
+    width: calc(50% - 20px); 
+    background-color: transparent; 
+    padding: 0; 
+    border: none;
+    box-sizing: border-box;
+}
+
+/* --- TÍTULO (ACERCA DE FLAPPY BIRD) --- */
+.info-section h3 {
+    font-family: var(--font-family); 
+    font-weight: 800;
+    color: var(--color-primary-pink);
+    margin-top: 0;
+    font-size: 1.6rem; 
+    margin-bottom: 8px; 
+}
+
+/* --- TEXTO PRINCIPAL  --- */
+.info-section p {
+    color: var(--color-text-secondary); 
+    font-size: 1rem; 
+    line-height: 1.5; 
+    margin-bottom: 15px; 
+}
+
+/* --- SUBTÍTULO DE CARACTERÍSTICAS  --- */
+.caracteristicas-subtitulo {
+    font-family: var(--font-family);
+    font-weight: 800;
+    font-size: 1.05rem; 
+    color: var(--color-text-primary); 
+    margin-top: 0;    
+    margin-bottom: 5px;  
+}
+
+/* --- LISTA DE CARACTERÍSTICAS  --- */
+.info-section ul {
+    list-style: disc; 
+    padding-left: 20px; 
+    margin-top: 5px; 
+    margin-left: 15px; 
+    margin-bottom: 15px;
+}
+
+/* --- ÍTEMS DE LISTA  --- */
+.info-section li {
+    font-size: 1rem; 
+    margin-bottom: 8px; 
+    color: var(--color-text-primary); 
+    font-weight: 500; 
+}
+
+/* --- TEXTO INFERIOR (Instrucciones Footer - Blanco) --- */
+.instrucciones-footer-text {
+    flex-basis: 100%; 
+    text-align: center;
+    color: var(--color-text-secondary); 
+    font-size: 1rem; 
+    margin-top: 10px; 
+    padding: 0 10px; 
+    font-weight: 600; 
+}
+
+
+/* ======================================= */
+/* ESTILOS PARA LA GALERÍA DE IMÁGENES */
+/* ======================================= */
+
+.info-section.game-gallery {
+    padding: 0; 
+    width: calc(50% - 20px); 
+    display: flex;
+    flex-direction: row; 
+    align-items: center; 
+    border: none; 
+    border-radius: 0; 
+    overflow: visible; 
+}
+
+.gallery-grid-blocka { 
+    display: flex;
+    flex-direction: row;
+    gap: 15px; 
+    width: 100%; 
+    height: auto; 
+    justify-content: space-between; 
+}
+
+
+.gallery-img-blocka { 
+    width: calc((100% - 30px) / 3); 
+    aspect-ratio: 1 / 1; 
+    height: auto; 
+    border: 2px solid var(--color-text-secondary); 
+    border-radius: 12px; 
+    padding: 5px; 
+    background-color: var(--color-card-bg); 
+    box-sizing: border-box; 
+    overflow: hidden; 
+    transition: none; 
+    cursor: default;
+}
+
+.gallery-img-blocka img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border-radius: 8px; 
+}
+
+/* ======================================= */
+/* 5. COMENTARIOS                          */
+/* ======================================= */
+
+.comments-section h2 {
+    font-family: var(--font-heading); 
+    font-weight: 800;
+    color: var(--color-text-primary);
+    font-size: 1.4rem;
+    margin-bottom: 5px; 
+    padding-top: 40px; 
+}
+
+.comments-section h2::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-primary-pink);
+    margin-top: 5px;
+    margin-bottom: 30px; 
+}
+
+.comment-input-area {
+    display: flex;
+    align-items: flex-start; 
+    gap: 15px; 
+    margin-bottom: 15px;
+}
+
+.user-avatar {
+    width: 50px; 
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0; 
+}
+
+.comment-textarea {
+    width: 100%; 
+    min-height: 100px;
+    background-color: var(--color-primary-pink); 
+    color: var(--color-text-primary);
+    border: none;
+    border-radius: 25px; 
+    padding: 15px 20px;
+    box-sizing: border-box;
+    resize: vertical; 
+    font-size: 1rem;
+    font-family: var(--font-base); 
+}
+
+.comment-textarea::placeholder {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.btn-comment-submit {
+    font-family: var(--font-base); 
+    font-weight: 600;
+    background-color: var(--color-primary-pink);
+    color: #ffffff;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 25px;
+    font-size: 1rem;
+    cursor: pointer;
+    display: block;
+    margin-left: auto; 
+    margin-bottom: 20px; 
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.btn-comment-submit:hover {
+    transform: translateY(-2px); 
+    background-color: var(--color-pink-hover); 
+    color: #A70046; 
+}
+
+.btn-comment-submit:active {
+    transform: translateY(0);
+}
+
+.comment-item {
+    display: flex; 
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 30px; 
+    padding-top: 10px;
+} 
+
+.comment-item .user-avatar {
+    width: 40px; 
+    height: 40px;
+}
+
+.comment-username {
+    font-weight: 600;
+    color: var(--color-text-primary);
+    font-size: 1rem;
+    margin-right: 10px; 
+}
+
+.comment-date {
+    color: var(--color-text-secondary);
+    font-size: 0.85rem;
+}
+
+.comment-content {
+    flex-grow: 1; 
+}
+.comment-text {
+    color: var(--color-text-primary);
+    font-size: 0.95rem; 
+    margin-top: 0;
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+.comment-actions {
+    display: flex;
+    justify-content: flex-end; 
+    gap: 15px;
+    margin-right: 5px; 
+    margin-top: 10px; 
+}
+
+.comment-actions i {
+    color: var(--color-text-secondary); 
+    cursor: pointer;
+    font-size: 1.1rem; 
+    transition: color 0.2s;
+}
+
+.comment-actions i:hover {
+    color: var(--color-primary-pink); 
+}
+
+/* ======================================= */
+/* 6. JUEGOS RELACIONADOS                  */
+/* ======================================= */
+
+.related-games-section {
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.related-games-section h2 {
+    font-family: var(--font-heading);
+    font-size: 1.35rem; 
+    font-weight: 800;
+    color: #ffffff;
+    padding-bottom: 10px;
+    margin-bottom: 5px ;
+}
+
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+    padding: 10px;
+    gap: 30px 20px; 
+}
+
+.game-card {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden; 
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
+    border: 3px solid transparent; 
+}
+
+.game-card:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5); 
+    border: 3px solid var(--color-primary-pink); 
+}
+
+.game-image {
+    width: 100%;
+    height: 150px; 
+    object-fit: cover; 
+    display: block;
+}
+
+.game-title-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px 15px;
+    background-color: rgba(22, 60, 100, 0.85); 
+    font-family: var(--font-base); 
+    font-weight: 600;
+    font-size: 1rem;
+    color: #ffffff;
+    text-align: left;
+}
+
+/* ======================================= */
+/* 7. KEYFRAMES Y ANIMACIONES (FOOTER)     */
+/* ======================================= */
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 10px 0px rgba(231, 76, 140, 0.4); 
+    background: linear-gradient(135deg, #e74c8c 0%, #f06292 100%); 
+  }
+  50% {
+    transform: scale(1.08); 
+    box-shadow: 0 0 30px 10px rgba(231, 76, 140, 0.85); 
+    background: linear-gradient(135deg, #f06292 0%, #e74c8c 100%); 
+  }
+}
+
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes slideInBounce {
+  0% { opacity: 0; transform: translateX(100%) scale(0.9); }
+  60% { transform: translateX(-10px) scale(1.02); }
+  100% { opacity: 1; transform: translateX(0) scale(1); }
+}
+
+@keyframes zoomIn {
+  0% { transform: scale(1.15); opacity: 0.8; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes heartbeat {
+  0% { transform: translateY(-3px) scale(1.0); box-shadow: 0 0 10px rgba(250, 98, 165, 0.4); }
+  50% { transform: translateY(-3px) scale(1.07); box-shadow: 0 0 25px rgba(250, 98, 165, 0.8); }
+  100% { transform: translateY(-3px) scale(1.0); box-shadow: 0 0 10px rgba(250, 98, 165, 0.4); }
+}
+
+@keyframes pulseHeart {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+
+.btn-add-game:not(.added):hover {
+    transform: translateY(-3px) scale(1.05); 
+    background-color: var(--color-pink-hover);
+    color: #A70046; 
+    animation: heartbeat 0.8s ease-in-out infinite alternate;
+}
+
+.btn-add-game:not(.added):hover i {
+    color: #A70046;
+    animation: pulseHeart 0.8s ease-in-out infinite alternate;
+}
+
+
+
+
+
+
+
+
+
+
