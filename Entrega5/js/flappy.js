@@ -6,8 +6,8 @@ const JUEGO_ANCHO = 1100;
 
 const JUEGO_ALTURA_UTIL = JUEGO_ALTURA * 0.90; 
 
-const GRAVEDAD = 0.45; 
-const IMPULSO_SALTO = -6; 
+let GRAVEDAD = 0.30; 
+let IMPULSO_SALTO = -4; 
 
 // VARIABLES DE DIFICULTAD 
 let VELOCIDAD_JUEGO = 4.0; 
@@ -24,10 +24,10 @@ const BIRD_WIDTH = 34;
 const BIRD_HEIGHT = 24;
 
 const DIFICULTAD_NIVELES = [
-    { score: 10, hueco: 120, velocidad: 4.0, intervalo: 2000, variacionY: 150 }, 
-    { score: 20, hueco: 100, velocidad: 4.0, intervalo: 1700, variacionY: 180 }, 
-    { score: 30, hueco: 90, velocidad: 4.0, intervalo: 1500, variacionY: 210 }, 
-    { score: 40, hueco: 80, velocidad: 4.0, intervalo: 1300, variacionY: 240 },
+    { score: 10, hueco: 120, velocidad: 4.0, intervalo: 2000, variacionY: 150, gravedad: 0.10, impulso: -6 }, 
+    { score: 20, hueco: 100, velocidad: 4.0, intervalo: 1700, variacionY: 180, gravedad: 0.50, impulso: -8 }, 
+    { score: 30, hueco: 90, velocidad: 4.0, intervalo: 1500, variacionY: 210, gravedad: 0.60, impulso: -10 }, 
+    { score: 40, hueco: 80, velocidad: 4.0, intervalo: 1300, variacionY: 240, gravedad: 0.70, impulso: -12},
 ];
 
 // ===========================================
@@ -748,7 +748,10 @@ class Juego {
         VELOCIDAD_JUEGO = 4.0; 
         HUECO_TUBERIA = 130; 
         INTERVALO_GENERACION = 2500;
-        MAX_VARIACION_Y = 120; 
+        MAX_VARIACION_Y = 120;
+        GRAVEDAD = 0.30;
+        IMPULSO_SALTO = -4
+
         this.nivelDificultad = 0;
     }
 
@@ -800,6 +803,11 @@ class Juego {
                 HUECO_TUBERIA = siguienteNivel.hueco;
                 INTERVALO_GENERACION = siguienteNivel.intervalo; 
                 MAX_VARIACION_Y = siguienteNivel.variacionY; 
+                GRAVEDAD = siguienteNivel.gravedad;
+                IMPULSO_SALTO = siguienteNivel.impulso;
+
+                 this.pajaro.gravedad = GRAVEDAD;
+                 this.pajaro.impulso = IMPULSO_SALTO;
                 
                 this.nivelDificultad++;
                 
