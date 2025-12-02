@@ -24,7 +24,7 @@ const BIRD_WIDTH = 34;
 const BIRD_HEIGHT = 24;
 
 const DIFICULTAD_NIVELES = [
-    { score: 10, hueco: 120, velocidad: 4.0, intervalo: 2000, variacionY: 150, gravedad: 0.10, impulso: -6 }, 
+    { score: 10, hueco: 120, velocidad: 4.0, intervalo: 2000, variacionY: 150, gravedad: 0.40, impulso: -6 }, 
     { score: 20, hueco: 100, velocidad: 4.0, intervalo: 1700, variacionY: 180, gravedad: 0.50, impulso: -8 }, 
     { score: 30, hueco: 90, velocidad: 4.0, intervalo: 1500, variacionY: 210, gravedad: 0.60, impulso: -10 }, 
     { score: 40, hueco: 80, velocidad: 4.0, intervalo: 1300, variacionY: 240, gravedad: 0.70, impulso: -12},
